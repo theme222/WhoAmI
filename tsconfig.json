@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     // General
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
@@ -15,6 +19,6 @@
 
     // Type Checking & Safety
     "strict": true,
-    "types": ["vite/client"]
+    "types": ["vite/client", "node"]
   }
 }
