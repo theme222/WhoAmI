@@ -6,7 +6,7 @@ import { type AccSetStore } from "@/types/types";
 
 
 export default function LightSwitch() {
-  const preferences = useContext(PreferencesContext) as AccSetStore<PreferencesInterface>;
+  const preferences = useContext(PreferencesContext)!;
   return (
     <label class="toggle group-checked:text-white toggle-accent">
       <input

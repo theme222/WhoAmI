@@ -1,22 +1,24 @@
-import { type JSXElement } from "solid-js";
-import type { IconInfo } from "@/types/types";
+import type { IconInfo, Knowledge } from "@/types/types";
 import { sun, questionMarkCircle } from "solid-heroicons/outline";
 import { Icon } from "solid-heroicons";
+import { GetUnavailableDependancies } from "@/libs/helperFuncs";
 
-export default function Card(props: { icon?: IconInfo, title: string, description: string, val: any, children: JSXElement[] | JSXElement }) {
+export default function Card(props: { info: Knowledge }) {
+  const info = props.info;
+  const unavailableDeps = GetUnavailableDependancies(info.dependencies);
+  let displayValue = unavailableDeps.length == 0;
+
   return (
-    <div class="bg-accent bg-transparent outline-3 outline-base-300 outline-dotted rounded-sm flex flex-col items-center gap-10 h-80 p-5 shadow-xl">
+    <div class="bg-base-300 rounded-sm flex flex-col items-center justify-between h-80 p-5 shadow-xl [container-type:inline-size]">
       <div class="flex justify-center items-center h-10 gap-5">
-        <Icon path={props.icon || questionMarkCircle} class="size-10"/>
-        <h3 class="text-3xl font-semibold">{props.title}</h3>
+        <h3 class="text-[12cqw] font-semibold text-nowrap">{info.title}</h3>
       </div>
-      <p class="text-sm">
-        {props.description}
-      </p>
-      <div class="">
-        <div class="flex items-center">
-          <span class="ml-2">{props.val}</span>
-        </div>
+      <p class="text-[7cqw] text-center text-pretty">{info.description}</p>
+      <div
+        class={`flex justify-center gap-5 items-center p-3 w-full rounded-md text-xl text-neutral-content ${displayValue ? 'bg-neutral-800' : 'bg-error'}`}
+      >
+        <Icon path={info.icon || questionMarkCircle} class="size-10" />
+        {displayValue ? info.value() : `Requires ${unavailableDeps.join(', ')}`}
       </div>
     </div>
   );

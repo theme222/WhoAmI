@@ -2,6 +2,7 @@
 import './index.css';
 import { render } from 'solid-js/web';
 import 'solid-devtools';
+import 'highlight.js/styles/atom-one-dark-reasonable.css';
 
 import App from './App';
 

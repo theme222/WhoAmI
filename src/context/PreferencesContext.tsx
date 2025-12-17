@@ -1,3 +1,4 @@
+// Stores user preferences that can be changed with buttons or switches.
 import { AccSetStore } from "@/types/types";
 import { createContext, createSignal, useContext } from "solid-js";
 import { type JSXElement } from "solid-js";

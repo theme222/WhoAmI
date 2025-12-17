@@ -6,8 +6,6 @@ import { Portal } from "solid-js/web";
 
 export default function Background (){
 
-  const preferences = useContext(PreferencesContext) as AccSetStore<PreferencesInterface>;
-
   return (
     <div class={`absolute -z-10 w-full h-full bg-base-200`} >
     </div>

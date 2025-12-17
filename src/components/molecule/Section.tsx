@@ -2,12 +2,12 @@ import { JSXElement } from "solid-js";
 import Card from "./Card";
 import { computerDesktop } from "solid-heroicons/outline";
 
-export default function Section(props: {children: JSXElement[]}) {
+export default function Section(props: {sectionName: string, children: JSXElement}) {
   return (
     <>
-      <div class="tabs tabs-lift">
-        <input type="radio" name="my_tabs_3" class="tab" aria-label="Tab 1" checked={true}/>
-        <div class="tab-content bg-base-100 border-base-300 grid grid-cols-3 gap-20 p-10">
+      <div class="tabs tabs-lift bg-transparent">
+        <div class="tab tab-active">{props.sectionName}</div>
+        <div class="tab-content bg-base-100 border-base-300 grid grid-cols-3 gap-15 p-10">
           {props.children}
         </div>
       </div>

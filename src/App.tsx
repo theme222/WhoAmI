@@ -8,6 +8,7 @@ import { onMount } from 'solid-js';
 import Navbar from './components/molecule/Navbar';
 import BrowserPage from './pages/knowledge/BrowserPage';
 import NotFoundPage from './pages/404';
+import DetailOverlay from './components/molecule/DetailOverlay';
 
 function DefaultPageWrapper(props: any) {
   return (
@@ -23,6 +24,7 @@ export default function App() {
     <>
       <Context>
         <Background />
+        <DetailOverlay />
         <div class="absolute w-full">
           <Router>
             <Route path="/" component={RootPage} />
