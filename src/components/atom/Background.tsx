@@ -7,7 +7,7 @@ import { Portal } from "solid-js/web";
 export default function Background (){
 
   return (
-    <div class={`absolute -z-10 w-full h-full bg-base-200`} >
+    <div class="absolute -z-10 w-full h-screen bg-base-200" >
     </div>
   );
 }

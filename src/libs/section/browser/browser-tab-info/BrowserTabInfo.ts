@@ -1,4 +1,4 @@
-import { globeAlt, wrenchScrewdriver, devicePhoneMobile } from "solid-heroicons/outline";
+import { globeAlt, wrenchScrewdriver, devicePhoneMobile, cog_8Tooth, magnifyingGlass, language as language_icon } from "solid-heroicons/outline";
 import { type Knowledge } from "@/types/types";
 import Bowser from "bowser";
 import { createSignal } from "solid-js";
@@ -9,12 +9,19 @@ const bowserParser = Bowser.getParser(window.navigator.userAgent);
 //// BROWSER NAME ////
 const [browserName_val, setBrowserName_val] = createSignal("");
 
-export const browserName: Knowledge = {
+export function setBrowserName() {
+  if (!CheckDependancies(browserName_k.dependencies)) return;
+  setBrowserName_val(bowserParser.getBrowserName() || "unknown browser");
+}
+
+export const browserName_k: Knowledge = {
   title: "Browser Name",
   description: "The most basic of information. Some users use Google Chrome. Some users use Safari. But lets be honest here, everything is chromium.",
-  dependencies: ["userAgent"],
+  detailedDescription: "The most basic of information. Although with modern browsers, the browser name is often not the name of the browser itself, but rather the name of the engine that powers it. For example Chromium based browsers will show up as 'Chrome'",
+  dependencies: ["window", "navigator", "userAgent"],
   value: browserName_val,
   icon: globeAlt,
+  set: setBrowserName,
   code:
 `
 // Using the navigator interface
@@ -22,100 +29,66 @@ window.navigator.userAgent;
 // Using the Bowser-js library for easy access
 Bowser.getParser(window.navigator.userAgent).getBrowserName();
 // Experimental method
-navigator.userAgentData.brands;
+window.navigator.userAgentData.brands;
 `
 };
-
-export function setBrowserName() {
-  if (!CheckDependancies(browserName.dependencies)) return;
-  setBrowserName_val(bowserParser.getBrowserName() || "unknown browser");
-}
 //// BROWSER NAME ////
 
-//// OPERATING SYSTEM ////
-const [operatingSystem_val, setOperatingSystem_val] = createSignal("");
+//// DO NOT TRACK ////
+const [doNotTrack_val, setDoNotTrack_val] = createSignal<string | null>("");
 
-export const operatingSystem: Knowledge = {
-  title: "Operating System",
-  description: "The OS (operating system) is the software that manages everything in a computer. Most people use Windows, MacOS, Linux, Android, iOS.",
-  dependencies: ["userAgent"],
-  value: operatingSystem_val,
-  icon: wrenchScrewdriver,
+export function setDoNotTrack() {
+  if (!CheckDependancies(doNotTrack_k.dependencies)) return;
+  setDoNotTrack_val(window.navigator.doNotTrack || "unspecified");
+}
+
+export const doNotTrack_k: Knowledge = {
+  title: "Do Not Track",
+  description: "Do Not Track is a privacy feature that allows users to opt-out of tracking by websites and advertisers.",
+  dependencies: ["window", "navigator", "doNotTrack"],
+  value: doNotTrack_val,
+  icon: magnifyingGlass,
+  set: setDoNotTrack,
   code:
 `
 // Using the navigator interface
-window.navigator.userAgent;
-// Using the Bowser-js library for easy access
-Bowser.getParser(window.navigator.userAgent).getOSName();
-// Experimental method
-navigator.userAgentData.platform;
+// Warning: This method is considered deprecated and should not be used.
+// Actual values vary by browser.
+window.navigator.doNotTrack;
 `
 };
+//// DO NOT TRACK ////
 
-export function setOperatingSystem() {
-  if (!CheckDependancies(operatingSystem.dependencies)) return;
-  setOperatingSystem_val(bowserParser.getOSName() || "unknown OS");
+//// LANGUAGE ////
+const [language_val, setLanguage_val] = createSignal<string>("");
+
+export function setLanguage() {
+  if (!CheckDependancies(language_k.dependencies)) return;
+  setLanguage_val(window.navigator.languages.join(", ") || window.navigator.language);
 }
-//// OPERATING SYSTEM ////
 
-//// PLATFORM ////
-
-const [platform_val, setPlatform_val] = createSignal("");
-
-export const platform: Knowledge = {
-  title: "Platform",
-  description: "The platform the user is using. (desktop, mobile, tablet)",
-  dependencies: ["userAgent"],
-  value: platform_val,
-  icon: wrenchScrewdriver,
+export const language_k: Knowledge = {
+  title: "Language",
+  description: "A string that contains the preferred language of the user, in a BCP 47 language tag.",
+  dependencies: ["window", "navigator", "language"],
+  value: language_val,
+  icon: language_icon,
+  set: setLanguage,
   code:
 `
-// Using the navigator interface (inferred value)
-window.navigator.userAgent;
-// Using the Bowser-js library for easy access
-Bowser.getParser(window.navigator.userAgent).getOSName();
-// Experimental method
-navigator.userAgentData.mobile; // returns true if mobile, false if desktop
+// Using the navigator interface
+window.navigator.language; // Get the user's preffered langugae
+window.navigator.languages; // Get user preffered languages ordered by preference
 `
 };
-
-export function setPlatform() {
-  if (!CheckDependancies(platform.dependencies)) return;
-  setPlatform_val(bowserParser.getPlatformType() || "unknown platform");
-}
-//// PLATFORM ////
-
-//// DEVICE ////
-const [device_val, setDevice_val] = createSignal("");
-
-export const device: Knowledge = {
-  title: "Device",
-  description: "The device model the user is using. Contains vendor and model information.",
-  dependencies: ["userAgent"],
-  value: device_val,
-  icon: devicePhoneMobile,
-  code:
-`
-// Using the navigator interface (inferred value)
-window.navigator.userAgent;
-// Using the Bowser-js library for easy access
-bowserParser.getResult().platform.vendor + bowserParser.getResult().platform.model;
-`
-};
-
-export function setDevice() {
-  if (!CheckDependancies(device.dependencies)) return;
-  setDevice_val((bowserParser.getResult().platform.vendor || "") + (bowserParser.getResult().platform.model || "") || "unknown");
-}
-//// DEVICE ////
+//// DO NOT TRACK ////
 
 // Contains all the functions that loads the values into the knowledge signals
 const functionList: (() => void)[] = [];
 
 functionList.push(setBrowserName);
-functionList.push(setOperatingSystem);
-functionList.push(setDevice);
-functionList.push(setPlatform);
+functionList.push(setDoNotTrack);
+functionList.push(setLanguage);
 
 
 export function loadAllBrowserTabInfo() {

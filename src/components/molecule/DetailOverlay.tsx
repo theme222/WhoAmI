@@ -1,18 +1,16 @@
 // The detail overlay that happens when a user clicks on a card
 import { createSignal, useContext } from "solid-js";
-import { StatusContext } from "@/context/StatusContext";
-import { Knowledge } from "@/types/types";
+import { StatusContext, StatusInterface } from "@/context/StatusContext";
+import type { Knowledge, AccSetStore } from "@/types/types";
 import { PreferencesContext } from "@/context/PreferencesContext";
 import BaseLayout from "../layout/BaseLayout";
 import { Icon } from "solid-heroicons";
-import { questionMarkCircle } from "solid-heroicons/outline";
-import { browserName } from "@/libs/section/browser/browser-tab-info/BrowserTabInfo";
+import { questionMarkCircle, xCircle } from "solid-heroicons/outline";
 import hljs from "highlight.js/lib/common"; // we don't need all the languages
 
 const [overlayData, setOverlayData] = createSignal<Knowledge | null>(null);
 
-export function openOverlay(data: Knowledge) {
-  const status = useContext(StatusContext)!;
+export function openOverlay(data: Knowledge, status: AccSetStore<StatusInterface>) {
   setOverlayData(data);
   status.set("detailOverlayOpen", true);
 }
@@ -20,14 +18,16 @@ export function openOverlay(data: Knowledge) {
 export default function DetailOverlay() {
   const status = useContext(StatusContext)!;
   const preferences = useContext(PreferencesContext)!;
-  setOverlayData(browserName);
 
-  const codeHTML =
-    overlayData()?.code ?
-    overlayData()!.code.trim().split("\n").map((val, index) => {
-      return `<pre data-prefix=${index + 1}><code>${hljs.highlight(val, { language: "javascript" }).value}</code></pre>`;
-    }).join("\n") :
-    "";
+  const genCodeHTML = () => {
+    return (
+      overlayData()?.code ?
+      overlayData()!.code.trim().split("\n").map((val, index) => {
+        return `<pre data-prefix=${index + 1}><code>${hljs.highlight(val, { language: "javascript" }).value}</code></pre>`;
+      }).join("\n") :
+      ""
+    );
+  }
 
   return (
     <div
@@ -39,12 +39,12 @@ export default function DetailOverlay() {
         overflow-hidden
         `}
     >
-      <div id="grid-background-animated" class="absolute w-full h-full">
+      <button id="grid-background-animated" class="absolute w-full h-full cursor-pointer" onClick={() => { status.set("detailOverlayOpen", false); }}>
         <div class="grid-bg scale-120 flex flex-wrap w-full h-full -skew-y-4 animate-[grid-background-animation_10s_linear_infinite]">
         </div>
-      </div>
+      </button>
 
-      <BaseLayout class="z-11 mt-20">
+      <BaseLayout class="mt-20">
         <div class="bg-base-100 size-20 flex flex-col items-center p-8 w-full h-auto rounded-md gap-8">
           <div class="w-full flex justify-center items-center gap-8">
             <Icon path={overlayData()?.icon || questionMarkCircle} class="size-16"/>
@@ -52,9 +52,10 @@ export default function DetailOverlay() {
           </div>
           <p class="text-xl text-center">{overlayData()?.detailedDescription || overlayData()?.description}</p>
         </div>
-        <div class="mockup-code w-full" innerHTML={codeHTML}>
+        <div class="mockup-code w-full" innerHTML={genCodeHTML()}>
         </div>
       </BaseLayout>
+
     </div>
   );
 }

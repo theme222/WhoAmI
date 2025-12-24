@@ -1,4 +1,4 @@
-import { StatusContext, StatusInterface } from "@/context/StatusContext";
+import { StatusContext, StatusInterface, StatusResetFuncs } from "@/context/StatusContext";
 import { type Dependancy, type AccSetStore } from "@/types/types";
 import { useContext } from "solid-js";
 
@@ -8,6 +8,11 @@ export function CheckDependancies(dependancies: Dependancy[]): boolean {
     if (!statusStore.acc[dep])
       return false;
   return true;
+}
+
+export function ResetDependancies(dependancies: Dependancy[]): void {
+  for (const dep of dependancies)
+    StatusResetFuncs[dep]();
 }
 
 export function GetUnavailableDependancies(dependancies: Dependancy[]): Dependancy[] {

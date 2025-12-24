@@ -6,18 +6,46 @@ import { createStore } from "solid-js/store";
 
 export const StatusContext = createContext<AccSetStore<StatusInterface>>();
 
-export function StatusContextProvider(props: { children: JSXElement }) {
-  const [status, setStatus] = createStore({
-    animationReady: false,
-    userAgent:
-      typeof window !== "undefined" &&
-      typeof window.navigator !== "undefined" &&
-      typeof window.navigator.userAgent !== "undefined",
-    detailOverlayOpen: true
-  });
+const [status, setStatus] = createStore<StatusInterface>({
+  animationReady: false,
+  window: typeof window !== "undefined",
+  navigator: typeof window.navigator !== "undefined",
+  userAgent: typeof window.navigator.userAgent !== "undefined",
+  doNotTrack: typeof window.navigator.doNotTrack !== "undefined",
+  language: typeof window.navigator.languages !== "undefined" || typeof window.navigator.language !== "undefined",
+  detailOverlayOpen: false
+});
 
-  status.animationReady = false;
-  requestAnimationFrame(() => setStatus("animationReady", true) );
+// Main use case for re attempting asking for permissions.
+export const StatusResetFuncs: { [K in keyof StatusInterface]: () => void } = {
+  animationReady: () => {
+    requestAnimationFrame(() => setStatus("animationReady", true));
+  },
+
+  // These really don't need to be reset but exists for consistency.
+  window: () => {
+    setStatus("window", typeof window !== "undefined");
+  },
+  navigator: () => {
+    setStatus("navigator", typeof window.navigator !== "undefined");
+  },
+  userAgent: () => {
+    setStatus("userAgent", typeof window.navigator.userAgent !== "undefined");
+  },
+  doNotTrack: () => {
+    setStatus("doNotTrack", typeof window.navigator.doNotTrack !== "undefined");
+  },
+  language: () => {
+    setStatus("language", typeof window.navigator.languages !== "undefined" || typeof window.navigator.language !== "undefined");
+  },
+
+  detailOverlayOpen: () => {
+    setStatus("detailOverlayOpen", false);
+  },
+}
+
+export function StatusContextProvider(props: { children: JSXElement }) {
+  StatusResetFuncs.animationReady();
 
   return (
     <StatusContext.Provider value={{ acc: status, set: setStatus }}>
@@ -28,6 +56,10 @@ export function StatusContextProvider(props: { children: JSXElement }) {
 
 export interface StatusInterface {
   animationReady: boolean;
+  window: boolean;
+  navigator: boolean;
   userAgent: boolean;
+  doNotTrack: boolean;
+  language: boolean;
   detailOverlayOpen: boolean;
 }

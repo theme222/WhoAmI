@@ -5,7 +5,8 @@ import { loadAllBrowserSection } from "@/libs/section/browser/load";
 import { onMount } from "solid-js";
 
 // Import knowledge sections
-import { browserName, operatingSystem, platform, device } from "@/libs/section/browser/browser-tab-info/BrowserTabInfo";
+import { browserName_k, doNotTrack_k, language_k } from "@/libs/section/browser/browser-tab-info/BrowserTabInfo";
+import { device_k, operatingSystem_k, platform_k } from "@/libs/section/browser/browser-tab-info/DeviceInfo";
 import BaseLayout from "@/components/layout/BaseLayout";
 
 export default function BrowserPage() {
@@ -18,12 +19,16 @@ export default function BrowserPage() {
         These are the things the browser knows about you by default and are
         given to developers via the API.
       </p>
-      <div id="main-section" class="grid w-full grid-cols-1">
+      <div id="main-section" class="grid w-full grid-cols-1 gap-10">
         <Section sectionName="Browser & Tab Info">
-          <Card info={browserName} />
-          <Card info={operatingSystem} />
-          <Card info={platform} />
-          <Card info={device} />
+          <Card info={browserName_k} />
+          <Card info={doNotTrack_k} />
+          <Card info={language_k} />
+        </Section>
+        <Section sectionName="Device Info">
+          <Card info={device_k} />
+          <Card info={operatingSystem_k} />
+          <Card info={platform_k} />
         </Section>
       </div>
     </BaseLayout>

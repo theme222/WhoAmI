@@ -24,6 +24,7 @@ export interface Knowledge {
   dependencies: Dependancy[], // Check for each dependencies' validity first before using the value.
   value: Accessor<any>,
   icon?: IconInfo,
+  set: () => void,
   code: string
 }
 
