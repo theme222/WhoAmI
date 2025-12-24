@@ -1,0 +1,15 @@
+on:
+  push:
+    branches:
+    - prod
+jobs: 
+  build: 
+    name: Build
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Install dependancies
+        run: | 
+          echo "Installing dependancies... TEST"
+          npm i
+      - name: Build website
+        run: npm run build
