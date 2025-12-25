@@ -58,7 +58,7 @@ export const platform_k: Knowledge = {
 // Using the navigator interface (inferred value)
 window.navigator.userAgent;
 // Using the Bowser-js library for easy access
-Bowser.getParser(window.navigator.userAgent).getOSName();
+Bowser.getParser(window.navigator.userAgent).getPlatformType();
 // Experimental method
 window.navigator.userAgentData.mobile; // returns true if mobile, false if desktop
 `,
@@ -97,8 +97,8 @@ bowserParser.getResult().platform.vendor + bowserParser.getResult().platform.mod
 const functionList: (() => void)[] = [];
 
 functionList.push(setOperatingSystem);
-functionList.push(setDevice);
 functionList.push(setPlatform);
+functionList.push(setDevice);
 
 export function loadAllDeviceInfo() {
   for (let i = 0; i < functionList.length; i++) {
@@ -106,7 +106,7 @@ export function loadAllDeviceInfo() {
       functionList[i]();
     } catch (error) {
       console.error(
-        `Error while loading browser tab info of function: ${functionList[i].name}`,
+        `Error while loading device info of function: ${functionList[i].name}`,
       );
       console.error(error);
     }

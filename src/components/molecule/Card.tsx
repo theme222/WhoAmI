@@ -31,7 +31,7 @@ export default function Card(props: { info: Knowledge }) {
         onClick={() => {ResetDependancies(info.dependencies)}}
       >
         <Icon path={info.icon || questionMarkCircle} class="size-10" />
-        {displayValue ? info.value() : `Requires ${unavailableDeps[0]}`}
+        {displayValue ? String(info.value()) : `Requires ${unavailableDeps[0]}`}
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ const [status, setStatus] = createStore<StatusInterface>({
   userAgent: typeof window.navigator.userAgent !== "undefined",
   doNotTrack: typeof window.navigator.doNotTrack !== "undefined",
   language: typeof window.navigator.languages !== "undefined" || typeof window.navigator.language !== "undefined",
+  pdfViewerEnabled: typeof window.navigator.pdfViewerEnabled !== "undefined",
   detailOverlayOpen: false
 });
 
@@ -38,6 +39,9 @@ export const StatusResetFuncs: { [K in keyof StatusInterface]: () => void } = {
   language: () => {
     setStatus("language", typeof window.navigator.languages !== "undefined" || typeof window.navigator.language !== "undefined");
   },
+  pdfViewerEnabled: () => {
+    setStatus("pdfViewerEnabled", typeof window.navigator.pdfViewerEnabled !== "undefined");
+  },
 
   detailOverlayOpen: () => {
     setStatus("detailOverlayOpen", false);
@@ -61,5 +65,6 @@ export interface StatusInterface {
   userAgent: boolean;
   doNotTrack: boolean;
   language: boolean;
+  pdfViewerEnabled: boolean;
   detailOverlayOpen: boolean;
 }

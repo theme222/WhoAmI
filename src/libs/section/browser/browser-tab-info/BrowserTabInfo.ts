@@ -1,4 +1,4 @@
-import { globeAlt, wrenchScrewdriver, devicePhoneMobile, cog_8Tooth, magnifyingGlass, language as language_icon } from "solid-heroicons/outline";
+import { globeAlt, wrenchScrewdriver, devicePhoneMobile, cog_8Tooth, magnifyingGlass, language as language_icon, document } from "solid-heroicons/outline";
 import { type Knowledge } from "@/types/types";
 import Bowser from "bowser";
 import { createSignal } from "solid-js";
@@ -83,12 +83,39 @@ window.navigator.languages; // Get user preffered languages ordered by preferenc
 };
 //// DO NOT TRACK ////
 
+//// PDF VIEWER ENABLED ////
+const [pdfViewerEnabled_val, setPdfViewerEnabled_val] = createSignal<boolean>(false);
+
+export function setPdfViewerEnabled() {
+  if (!CheckDependancies(language_k.dependencies)) return;
+  setPdfViewerEnabled_val(window.navigator.pdfViewerEnabled);
+}
+
+export const pdfViewerEnabled_k: Knowledge = {
+  title: "PDF Viewer Enabled",
+  description: "A boolean that indicates whether the user's browser supports the PDF viewer.",
+  dependencies: ["window", "navigator", "pdfViewerEnabled"],
+  value: pdfViewerEnabled_val,
+  icon: document,
+  set: setPdfViewerEnabled,
+  code:
+`
+// Using the navigator interface
+window.navigator.pdfViewerEnabled;
+// Use it in an if statement
+if (window.navigator.pdfViewerEnabled) console.log("PDF viewer is enabled");
+else console.log("PDF viewer is not enabled");
+`
+};
+//// PDF VIEWER ENABLED ////
+
 // Contains all the functions that loads the values into the knowledge signals
 const functionList: (() => void)[] = [];
 
 functionList.push(setBrowserName);
 functionList.push(setDoNotTrack);
 functionList.push(setLanguage);
+functionList.push(setPdfViewerEnabled);
 
 
 export function loadAllBrowserTabInfo() {
