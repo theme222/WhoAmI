@@ -1,3 +1,4 @@
+import { FeatureInterface } from "@/context/FeatureContext"
 import { StatusInterface } from "@/context/StatusContext"
 import { sun } from "solid-heroicons/solid"
 import { type Accessor, type Setter } from "solid-js"
@@ -28,4 +29,4 @@ export interface Knowledge {
   code: string
 }
 
-export type Dependancy = keyof StatusInterface;
+export type Dependancy = keyof StatusInterface | keyof FeatureInterface;

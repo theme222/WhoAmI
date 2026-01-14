@@ -14,9 +14,8 @@ export default function Root() {
 
   onMount(() => {
       setTimeout(() => setDoAnimation(true), 100)
-    }
-  );
-
+  } );
+  
   return (
     <>
       <div class="absolute w-full flex flex-col justify-center items-center my-40 gap-20">

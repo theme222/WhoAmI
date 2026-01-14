@@ -32,7 +32,8 @@ export default function DetailOverlay() {
   return (
     <div
       id="detail-overlay-container"
-      class={`absolute w-full h-full
+      class={`
+        fixed w-full h-full
         ${preferences.acc.useLightMode ? "bg-gray-950/80" : "bg-gray-950/90"}
         z-10 flex flex-col justify-center items-center
         ${status.acc.detailOverlayOpen ? "block" : "hidden"}

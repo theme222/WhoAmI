@@ -1,5 +1,6 @@
 import type { Component, JSXElement } from 'solid-js';
 import { Router, Route, RouteSectionProps } from '@solidjs/router';
+import { ResetAllStatuses } from '@/libs/helperFuncs';
 import RootPage from './pages/RootPage'
 import Context from './context/Context';
 import Background from './components/atom/Background';
@@ -20,6 +21,10 @@ function DefaultPageWrapper(props: any) {
 }
 
 export default function App() {
+  onMount(() => {
+    ResetAllStatuses(); // This might be computationally expensive? Consider moving to a web worker?
+  });
+
   return (
     <>
       <Context>

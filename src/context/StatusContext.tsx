@@ -6,43 +6,26 @@ import { createStore } from "solid-js/store";
 
 export const StatusContext = createContext<AccSetStore<StatusInterface>>();
 
-const [status, setStatus] = createStore<StatusInterface>({
+// This is the base status list which should not be used
+// This contains the current status of these values. It may change during the course of the lifecycle.
+const _statusList = {
   animationReady: false,
-  window: typeof window !== "undefined",
-  navigator: typeof window.navigator !== "undefined",
-  userAgent: typeof window.navigator.userAgent !== "undefined",
-  doNotTrack: typeof window.navigator.doNotTrack !== "undefined",
-  language: typeof window.navigator.languages !== "undefined" || typeof window.navigator.language !== "undefined",
-  pdfViewerEnabled: typeof window.navigator.pdfViewerEnabled !== "undefined",
-  detailOverlayOpen: false
-});
+  detailOverlayOpen: false,
+};
 
-// Main use case for re attempting asking for permissions.
+export function IsStatus(status: string) {
+  return status in _statusList;
+}
+
+export type StatusInterface = typeof _statusList;
+
+const [status, setStatus] = createStore<StatusInterface>(_statusList);
+
+// Main use case for re attempting asking for permissions. Always cover these in a try catch.
 export const StatusResetFuncs: { [K in keyof StatusInterface]: () => void } = {
   animationReady: () => {
     requestAnimationFrame(() => setStatus("animationReady", true));
   },
-
-  // These really don't need to be reset but exists for consistency.
-  window: () => {
-    setStatus("window", typeof window !== "undefined");
-  },
-  navigator: () => {
-    setStatus("navigator", typeof window.navigator !== "undefined");
-  },
-  userAgent: () => {
-    setStatus("userAgent", typeof window.navigator.userAgent !== "undefined");
-  },
-  doNotTrack: () => {
-    setStatus("doNotTrack", typeof window.navigator.doNotTrack !== "undefined");
-  },
-  language: () => {
-    setStatus("language", typeof window.navigator.languages !== "undefined" || typeof window.navigator.language !== "undefined");
-  },
-  pdfViewerEnabled: () => {
-    setStatus("pdfViewerEnabled", typeof window.navigator.pdfViewerEnabled !== "undefined");
-  },
-
   detailOverlayOpen: () => {
     setStatus("detailOverlayOpen", false);
   },
@@ -56,15 +39,4 @@ export function StatusContextProvider(props: { children: JSXElement }) {
       {props.children}
     </StatusContext.Provider>
   );
-}
-
-export interface StatusInterface {
-  animationReady: boolean;
-  window: boolean;
-  navigator: boolean;
-  userAgent: boolean;
-  doNotTrack: boolean;
-  language: boolean;
-  pdfViewerEnabled: boolean;
-  detailOverlayOpen: boolean;
 }
