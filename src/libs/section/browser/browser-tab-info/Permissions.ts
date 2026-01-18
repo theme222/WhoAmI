@@ -117,6 +117,44 @@ window.navigator.permissions.query({name: "accelerometer"})
 
 //// ACCESSIBILITY EVENTS ENABLED ////
 
+//// ACCESSIBILITY EVENTS ENABLED ////
+const [ambientLightSensor_val, setAmbientLightSensor_val] = createSignal<string | null>("");
+
+export function setAmbientLightSensor() {
+  if (!CheckDependancies(accessibilityEventsEnabled_k.dependencies)) return;
+  window.navigator.permissions.query({name: "ambient-light-sensor"})
+    .then((permissionStatus) => {
+      setAmbientLightSensor_val(permissionStatus.state);
+    })
+    .catch((error) => {
+      setAmbientLightSensor_val("N/A");
+    });
+}
+
+export const ambientLightSensor_k: Knowledge = {
+  title: "Ambient Light Sensor",
+  description: "This checks whether the website can access the ambient light sensor.",
+  detailedDescription: getDetailedPermissionString("A light-detecting component in electronic devices that measures the brightness of surroundings", permissionList["ambient-light-sensor"]),
+  dependencies: ["window", "navigator", "permissions"],
+  value: ambientLightSensor_val,
+  set: setAmbientLightSensor,
+  code:
+`
+// Using the navigator interface
+window.navigator.permissions.query({name: "accelerometer"})
+  .then((permissionStatus) => {
+    // Either "granted", "denied", or "prompt"
+    console.log(permissionStatus.state);
+  })
+  .catch((error) => {
+    // Not supported by the browser
+    console.error("Error while querying accelerometer permission:", error);
+  });
+`
+};
+
+//// ACCESSIBILITY EVENTS ENABLED ////
+
 // Contains all the functions that loads the values into the knowledge signals
 const functionList: (() => void)[] = [];
 
