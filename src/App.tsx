@@ -4,6 +4,8 @@ import { ResetAllStatuses } from '@/libs/helperFuncs';
 import RootPage from './pages/RootPage'
 import Context from './context/Context';
 import Background from './components/atom/Background';
+import BreakPointIndicator from './components/atom/BreakPointIndicator';
+
 
 import { onMount } from 'solid-js';
 import Navbar from './components/molecule/Navbar';
@@ -27,6 +29,7 @@ export default function App() {
 
   return (
     <>
+      {import.meta.env.DEV && <BreakPointIndicator />}
       <Context>
         <Background />
         <DetailOverlay />

@@ -19,11 +19,11 @@ export default function Root() {
   return (
     <>
       <div class="absolute w-full flex flex-col justify-center items-center my-40 gap-20">
-        <h1 class={`text-9xl font-bold text-primary ${doAnimation() && status.acc.animationReady ? 'scale-100' : 'scale-0'} transition-transform tranform duration-800 ease-out`}>
+        <h1 class={`text-[10cqw] font-bold text-primary ${doAnimation() && status.acc.animationReady ? 'scale-100' : 'scale-0'} transition-transform tranform duration-800 ease-out`}>
           WhoAmI?
         </h1>
         <div class="flex justify-center items-center gap-10">
-          <A class="btn btn-accent text-base-200 text-xl w-auto h-20 gap-4 items-center" href="/knowledge/browser">
+          <A class="btn btn-accent text-base-200 text-[2cqw] w-auto h-auto gap-4 p-2 items-center" href="/knowledge/browser">
             Let's find out
             <Icon path={arrowRight} class="size-8"/>
           </A>

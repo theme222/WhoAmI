@@ -117,17 +117,17 @@ window.navigator.permissions.query({name: "accelerometer"})
 
 //// ACCESSIBILITY EVENTS ENABLED ////
 
-//// ACCESSIBILITY EVENTS ENABLED ////
-const [ambientLightSensor_val, setAmbientLightSensor_val] = createSignal<string | null>("");
+//// AMBIENT LIGHT SENSOR ENABLED ////
+const [ambientLightSensorEnabled_val, setAmbientLightSensorEnabled_val] = createSignal<string | null>("");
 
-export function setAmbientLightSensor() {
+export function setAmbientLightSensorEnabled() {
   if (!CheckDependancies(accessibilityEventsEnabled_k.dependencies)) return;
   window.navigator.permissions.query({name: "ambient-light-sensor"})
     .then((permissionStatus) => {
-      setAmbientLightSensor_val(permissionStatus.state);
+      setAmbientLightSensorEnabled_val(permissionStatus.state);
     })
     .catch((error) => {
-      setAmbientLightSensor_val("N/A");
+      setAmbientLightSensorEnabled_val("N/A");
     });
 }
 
@@ -136,12 +136,12 @@ export const ambientLightSensor_k: Knowledge = {
   description: "This checks whether the website can access the ambient light sensor.",
   detailedDescription: getDetailedPermissionString("A light-detecting component in electronic devices that measures the brightness of surroundings", permissionList["ambient-light-sensor"]),
   dependencies: ["window", "navigator", "permissions"],
-  value: ambientLightSensor_val,
-  set: setAmbientLightSensor,
+  value: ambientLightSensorEnabled_val,
+  set: setAmbientLightSensorEnabled,
   code:
 `
 // Using the navigator interface
-window.navigator.permissions.query({name: "accelerometer"})
+window.navigator.permissions.query({name: "ambient-light-sensor"})
   .then((permissionStatus) => {
     // Either "granted", "denied", or "prompt"
     console.log(permissionStatus.state);
@@ -153,13 +153,14 @@ window.navigator.permissions.query({name: "accelerometer"})
 `
 };
 
-//// ACCESSIBILITY EVENTS ENABLED ////
+//// AMBIENT LIGHT SENSOR ENABLED ////
 
 // Contains all the functions that loads the values into the knowledge signals
 const functionList: (() => void)[] = [];
 
 functionList.push(setAccelerometerEnabled);
 functionList.push(setAccessibilityEventsEnabled)
+functionList.push(setAmbientLightSensorEnabled)
 
 export function loadAllPermissions() {
   for (let i = 0; i < functionList.length; i++) {
