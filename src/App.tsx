@@ -6,7 +6,6 @@ import Context from './context/Context';
 import Background from './components/atom/Background';
 import BreakPointIndicator from './components/atom/BreakPointIndicator';
 
-
 import { onMount } from 'solid-js';
 import Navbar from './components/molecule/Navbar';
 import BrowserPage from './pages/knowledge/BrowserPage';
@@ -25,6 +24,12 @@ function DefaultPageWrapper(props: any) {
 export default function App() {
   onMount(() => {
     ResetAllStatuses(); // This might be computationally expensive? Consider moving to a web worker?
+    
+    // Github pages refresh fix
+    if (sessionStorage.getItem("redirect")) {
+      window.location.replace(sessionStorage.getItem("redirect") as string);
+      sessionStorage.removeItem("redirect");
+    }
   });
 
   return (

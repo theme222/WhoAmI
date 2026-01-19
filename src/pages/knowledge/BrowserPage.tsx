@@ -8,7 +8,7 @@ import { onMount } from "solid-js";
 import { browserName_k, doNotTrack_k, language_k, pdfViewerEnabled_k } from "@/libs/section/browser/browser-tab-info/BrowserTabInfo";
 import { device_k, operatingSystem_k, platform_k } from "@/libs/section/browser/browser-tab-info/DeviceInfo";
 import BaseLayout from "@/components/layout/BaseLayout";
-import { accelerometerEnabled_k, accessibilityEventsEnabled_k } from "@/libs/section/browser/browser-tab-info/Permissions";
+import { accelerometerEnabled_k, accessibilityEventsEnabled_k, ambientLightSensorEnabled_k } from "@/libs/section/browser/browser-tab-info/Permissions";
 
 export default function BrowserPage() {
   onMount(() => {
@@ -37,6 +37,7 @@ export default function BrowserPage() {
         <Section sectionName="Permissions">
           <Card info={accelerometerEnabled_k} />
           <Card info={accessibilityEventsEnabled_k} />
+          <Card info={ambientLightSensorEnabled_k} />
         </Section>
       </div>
     </BaseLayout>

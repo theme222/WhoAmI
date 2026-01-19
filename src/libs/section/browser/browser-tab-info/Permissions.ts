@@ -131,7 +131,7 @@ export function setAmbientLightSensorEnabled() {
     });
 }
 
-export const ambientLightSensor_k: Knowledge = {
+export const ambientLightSensorEnabled_k: Knowledge = {
   title: "Ambient Light Sensor",
   description: "This checks whether the website can access the ambient light sensor.",
   detailedDescription: getDetailedPermissionString("A light-detecting component in electronic devices that measures the brightness of surroundings", permissionList["ambient-light-sensor"]),
