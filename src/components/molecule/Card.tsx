@@ -19,7 +19,7 @@ export default function Card(props: { info: Knowledge }) {
       h-60 lg:h-80 p-5 [container-type:inline-size] cursor-help shadow-sm
       hover:scale-105 hover:shadow-xl transition-all duration-300"
     >
-      <h3 class="text-[8cqw] md:text-[11cqw] font-semibold text-nowrap w-full md:h-10 gap-5 overflow-x-scroll overflow-y-auto text-center">{info.title}</h3>
+      <h3 class="text-[8cqw] md:text-[11cqw] font-semibold text-nowrap w-full md:h-10 gap-5 overflow-clip text-center">{info.title}</h3>
       <p class="text-15 md:text-[7cqw] text-center text-pretty overflow-ellipsis">{info.description}</p>
       <div
         class={`flex justify-center gap-5 items-center p-1 lg:p-3 w-full rounded-md

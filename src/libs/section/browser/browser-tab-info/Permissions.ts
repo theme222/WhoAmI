@@ -89,7 +89,7 @@ export function setAccessibilityEventsEnabled() {
   setPermissionEnabledBase("accessibility-events", accessibilityEventsEnabled_k, setAccessibilityEventsEnabled_val);
 }
 
-const accessibilityEventsDescription = "This checks whether the website can access accessibility events. This is a deprecated and non-standard API.";
+const accessibilityEventsDescription = "This checks whether the website can access accessibility events.";
 export const accessibilityEventsEnabled_k: Knowledge = {
   title: "Accessibility Events",
   description: accessibilityEventsDescription,
