@@ -8,7 +8,30 @@ import { onMount } from "solid-js";
 import { browserName_k, doNotTrack_k, language_k, pdfViewerEnabled_k } from "@/libs/section/browser/browser-tab-info/BrowserTabInfo";
 import { device_k, operatingSystem_k, platform_k } from "@/libs/section/browser/browser-tab-info/DeviceInfo";
 import BaseLayout from "@/components/layout/BaseLayout";
-import { accelerometerEnabled_k, accessibilityEventsEnabled_k, ambientLightSensorEnabled_k } from "@/libs/section/browser/browser-tab-info/Permissions";
+import {
+  accelerometerEnabled_k,
+  accessibilityEventsEnabled_k,
+  ambientLightSensorEnabled_k,
+  backgroundSyncEnabled_k,
+  cameraEnabled_k,
+  capturedSurfaceControlEnabled_k,
+  clipboardReadEnabled_k,
+  clipboardWriteEnabled_k,
+  geolocationEnabled_k,
+  gyroscopeEnabled_k,
+  localFontsEnabled_k,
+  magnetometerEnabled_k,
+  microphoneEnabled_k,
+  midiEnabled_k,
+  notificationsEnabled_k,
+  paymentHandlerEnabled_k,
+  persistentStorageEnabled_k,
+  pushEnabled_k,
+  screenWakeLockEnabled_k,
+  storageAccessEnabled_k,
+  topLevelStorageAccessEnabled_k,
+  windowManagementEnabled_k
+} from "@/libs/section/browser/browser-tab-info/Permissions";
 
 export default function BrowserPage() {
   onMount(() => {
@@ -38,6 +61,25 @@ export default function BrowserPage() {
           <Card info={accelerometerEnabled_k} />
           <Card info={accessibilityEventsEnabled_k} />
           <Card info={ambientLightSensorEnabled_k} />
+          <Card info={backgroundSyncEnabled_k} />
+          <Card info={cameraEnabled_k} />
+          <Card info={capturedSurfaceControlEnabled_k} />
+          <Card info={clipboardReadEnabled_k} />
+          <Card info={clipboardWriteEnabled_k} />
+          <Card info={geolocationEnabled_k} />
+          <Card info={gyroscopeEnabled_k} />
+          <Card info={localFontsEnabled_k} />
+          <Card info={magnetometerEnabled_k} />
+          <Card info={microphoneEnabled_k} />
+          <Card info={midiEnabled_k} />
+          <Card info={notificationsEnabled_k} />
+          <Card info={paymentHandlerEnabled_k} />
+          <Card info={persistentStorageEnabled_k} />
+          <Card info={pushEnabled_k} />
+          <Card info={screenWakeLockEnabled_k} />
+          <Card info={storageAccessEnabled_k} />
+          <Card info={topLevelStorageAccessEnabled_k} />
+          <Card info={windowManagementEnabled_k} />
         </Section>
       </div>
     </BaseLayout>
