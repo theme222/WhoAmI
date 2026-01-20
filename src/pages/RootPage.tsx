@@ -14,6 +14,12 @@ export default function Root() {
 
   onMount(() => {
       setTimeout(() => setDoAnimation(true), 100)
+      
+      // Github pages refresh fix
+      if (sessionStorage.getItem("redirect")) {
+        window.location.replace(sessionStorage.getItem("redirect") as string);
+        sessionStorage.removeItem("redirect");
+      }
   } );
   
   return (

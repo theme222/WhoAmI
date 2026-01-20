@@ -25,11 +25,6 @@ export default function App() {
   onMount(() => {
     ResetAllStatuses(); // This might be computationally expensive? Consider moving to a web worker?
     
-    // Github pages refresh fix
-    if (sessionStorage.getItem("redirect")) {
-      window.location.replace(sessionStorage.getItem("redirect") as string);
-      sessionStorage.removeItem("redirect");
-    }
   });
 
   return (
