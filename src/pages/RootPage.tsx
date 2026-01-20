@@ -1,6 +1,6 @@
 import { arrowRight } from "solid-heroicons/outline";
 import { Icon } from "solid-heroicons";
-import { A } from "@solidjs/router";
+import { A,  } from "@solidjs/router";
 import Navbar from "@/components/molecule/Navbar";
 import { useNavigate } from "@solidjs/router";
 import { createSignal } from "solid-js";
@@ -14,10 +14,11 @@ export default function Root() {
 
   onMount(() => {
       setTimeout(() => setDoAnimation(true), 100)
+      const navigate = useNavigate();
       
       // Github pages refresh fix
       if (sessionStorage.getItem("redirect")) {
-        window.location.replace(sessionStorage.getItem("redirect") as string);
+        navigate(sessionStorage.getItem("redirect") as string, {replace: true});
         sessionStorage.removeItem("redirect");
       }
   } );
