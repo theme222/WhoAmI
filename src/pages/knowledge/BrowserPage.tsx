@@ -45,7 +45,7 @@ export default function BrowserPage() {
         These are the things the browser knows about you by default and are
         given to developers via the API.
       </p>
-      <div id="main-section" class="grid w-full grid-cols-1 gap-10">
+      <main id="main-section" class="grid w-full grid-cols-1 gap-10">
         <Section sectionName="Browser & Tab Info">
           <Card info={browserName_k} />
           <Card info={doNotTrack_k} />
@@ -81,7 +81,7 @@ export default function BrowserPage() {
           <Card info={topLevelStorageAccessEnabled_k} />
           <Card info={windowManagementEnabled_k} />
         </Section>
-      </div>
+      </main>
     </BaseLayout>
   );
 }

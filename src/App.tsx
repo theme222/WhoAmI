@@ -5,6 +5,7 @@ import RootPage from './pages/RootPage'
 import Context from './context/Context';
 import Background from './components/atom/Background';
 import BreakPointIndicator from './components/atom/BreakPointIndicator';
+import { MetaProvider, Title } from '@solidjs/meta';
 
 import { onMount } from 'solid-js';
 import Navbar from './components/molecule/Navbar';

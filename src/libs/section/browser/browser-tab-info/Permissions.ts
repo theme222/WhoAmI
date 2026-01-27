@@ -1,7 +1,23 @@
 import {
-  wrenchScrewdriver,
   devicePhoneMobile,
-  cog_8Tooth,
+  eye,
+  sun,
+  arrowPath,
+  camera,
+  viewfinderCircle,
+  clipboard,
+  clipboardDocument,
+  mapPin,
+  language,
+  bars_3BottomRight,
+  microphone,
+  musicalNote,
+  bell,
+  creditCard,
+  circleStack,
+  arrowUpTray,
+  lockOpen,
+  window as window_icon
 } from "solid-heroicons/outline";
 import { type Knowledge } from "@/types/types";
 import { createSignal, Setter } from "solid-js";
@@ -78,6 +94,7 @@ export const accelerometerEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: accelerometerEnabled_val,
   set: setAccelerometerEnabled,
+  icon: devicePhoneMobile,
   code: getPermissionCodeString("accelerometer")
 };
 //// ACCELEROMETER ENABLED ////
@@ -97,6 +114,7 @@ export const accessibilityEventsEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: accessibilityEventsEnabled_val,
   set: setAccessibilityEventsEnabled,
+  icon: eye,
   code: getPermissionCodeString("accessibility-events")
 };
 //// ACCESSIBILITY EVENTS ENABLED ////
@@ -116,6 +134,7 @@ export const ambientLightSensorEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: ambientLightSensorEnabled_val,
   set: setAmbientLightSensorEnabled,
+  icon: sun,
   code: getPermissionCodeString("ambient-light-sensor")
 };
 //// AMBIENT LIGHT SENSOR ENABLED ////
@@ -135,6 +154,7 @@ export const backgroundSyncEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: backgroundSyncEnabled_val,
   set: setBackgroundSyncEnabled,
+  icon: arrowPath,
   code: getPermissionCodeString("background-sync")
 };
 //// BACKGROUND SYNC ENABLED ////
@@ -154,6 +174,7 @@ export const cameraEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: cameraEnabled_val,
   set: setCameraEnabled,
+  icon: camera,
   code: getPermissionCodeString("camera")
 };
 //// CAMERA ENABLED ////
@@ -173,6 +194,7 @@ export const capturedSurfaceControlEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: capturedSurfaceControlEnabled_val,
   set: setCapturedSurfaceControlEnabled,
+  icon: viewfinderCircle,
   code: getPermissionCodeString("captured-surface-control")
 };
 //// CAPTURED SURFACE CONTROL ENABLED ////
@@ -192,6 +214,7 @@ export const clipboardReadEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: clipboardReadEnabled_val,
   set: setClipboardReadEnabled,
+  icon: clipboard,
   code: getPermissionCodeString("clipboard-read")
 };
 //// CLIPBOARD READ ENABLED ////
@@ -211,6 +234,7 @@ export const clipboardWriteEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: clipboardWriteEnabled_val,
   set: setClipboardWriteEnabled,
+  icon: clipboardDocument,
   code: getPermissionCodeString("clipboard-write")
 };
 //// CLIPBOARD WRITE ENABLED ////
@@ -230,6 +254,7 @@ export const geolocationEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: geolocationEnabled_val,
   set: setGeolocationEnabled,
+  icon: mapPin,
   code: getPermissionCodeString("geolocation")
 };
 //// GEOLOCATION ENABLED ////
@@ -249,6 +274,7 @@ export const gyroscopeEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: gyroscopeEnabled_val,
   set: setGyroscopeEnabled,
+  icon: arrowPath,
   code: getPermissionCodeString("gyroscope")
 };
 //// GYROSCOPE ENABLED ////
@@ -268,6 +294,7 @@ export const localFontsEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: localFontsEnabled_val,
   set: setLocalFontsEnabled,
+  icon: language,
   code: getPermissionCodeString("local-fonts")
 };
 //// LOCAL FONTS ENABLED ////
@@ -287,6 +314,7 @@ export const magnetometerEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: magnetometerEnabled_val,
   set: setMagnetometerEnabled,
+  icon: bars_3BottomRight,
   code: getPermissionCodeString("magnetometer")
 };
 //// MAGNETOMETER ENABLED ////
@@ -306,6 +334,7 @@ export const microphoneEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: microphoneEnabled_val,
   set: setMicrophoneEnabled,
+  icon: microphone,
   code: getPermissionCodeString("microphone")
 };
 //// MICROPHONE ENABLED ////
@@ -325,6 +354,7 @@ export const midiEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: midiEnabled_val,
   set: setMidiEnabled,
+  icon: musicalNote,
   code: getPermissionCodeString("midi")
 };
 //// MIDI ENABLED ////
@@ -344,6 +374,7 @@ export const notificationsEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: notificationsEnabled_val,
   set: setNotificationsEnabled,
+  icon: bell,
   code: getPermissionCodeString("notifications")
 };
 //// NOTIFICATIONS ENABLED ////
@@ -363,6 +394,7 @@ export const paymentHandlerEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: paymentHandlerEnabled_val,
   set: setPaymentHandlerEnabled,
+  icon: creditCard,
   code: getPermissionCodeString("payment-handler")
 };
 //// PAYMENT HANDLER ENABLED ////
@@ -382,6 +414,7 @@ export const persistentStorageEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: persistentStorageEnabled_val,
   set: setPersistentStorageEnabled,
+  icon: circleStack,
   code: getPermissionCodeString("persistent-storage")
 };
 //// PERSISTENT STORAGE ENABLED ////
@@ -401,6 +434,7 @@ export const pushEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: pushEnabled_val,
   set: setPushEnabled,
+  icon: arrowUpTray,
   code: getPermissionCodeString("push")
 };
 //// PUSH ENABLED ////
@@ -420,6 +454,7 @@ export const screenWakeLockEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: screenWakeLockEnabled_val,
   set: setScreenWakeLockEnabled,
+  icon: lockOpen,
   code: getPermissionCodeString("screen-wake-lock")
 };
 //// SCREEN WAKE LOCK ENABLED ////
@@ -439,6 +474,7 @@ export const storageAccessEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: storageAccessEnabled_val,
   set: setStorageAccessEnabled,
+  icon: circleStack,
   code: getPermissionCodeString("storage-access")
 };
 //// STORAGE ACCESS ENABLED ////
@@ -458,6 +494,7 @@ export const topLevelStorageAccessEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: topLevelStorageAccessEnabled_val,
   set: setTopLevelStorageAccessEnabled,
+  icon: circleStack,
   code: getPermissionCodeString("top-level-storage-access")
 };
 //// TOP-LEVEL STORAGE ACCESS ENABLED ////
@@ -477,6 +514,7 @@ export const windowManagementEnabled_k: Knowledge = {
   dependencies: ["window", "navigator", "permissions"],
   value: windowManagementEnabled_val,
   set: setWindowManagementEnabled,
+  icon: window_icon,
   code: getPermissionCodeString("window-management")
 };
 //// WINDOW MANAGEMENT ENABLED ////
